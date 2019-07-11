@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="回收客户表id" value="${item.id}" underline="true"/>
+                            <#input id="customerId" name="客户UUID 外键" value="${item.customerId}" underline="true"/>
+                            <#input id="cusOldSaler" name="前销售人" value="${item.cusOldSaler}" underline="true"/>
+                            <#input id="createTime" name="回收时间" value="${item.createTime}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="other1" name="其他1" value="${item.other1}" underline="true"/>
+                            <#input id="other2" name="其他2" value="${item.other2}" underline="true"/>
+                            <#input id="other3" name="其他3" value="${item.other3}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CrmCustomerrabinInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CrmCustomerrabinInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/crm/crmCustomerrabin/crmCustomerrabin_info.js"></script>
+@}

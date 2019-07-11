@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.CrmCustomerrabinMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.CrmCustomerrabin">
+        <id column="id" property="id" />
+        <result column="customerId" property="customerId" />
+        <result column="cusOldSaler" property="cusOldSaler" />
+        <result column="createTime" property="createTime" />
+        <result column="other1" property="other1" />
+        <result column="other2" property="other2" />
+        <result column="other3" property="other3" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, customerId, cusOldSaler, createTime, other1, other2, other3
+    </sql>
+
+</mapper>

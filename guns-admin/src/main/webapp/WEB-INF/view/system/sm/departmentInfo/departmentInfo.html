@@ -1,0 +1,40 @@
+<@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>我的项目功能管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="condition" name="名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="departmentInfo.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="departmentInfoTableToolbar" role="group">
+
+                            <#button name="新建系别信息" icon="fa-plus" clickFun="departmentInfo.openAdddepartmentInfo()"/>
+
+
+                            <#button name="编辑系别信息" icon="fa-edit" clickFun="departmentInfo.openDepartmentInfoDetail()" space="true"/>
+
+
+                            <#button name="删除系别信息" icon="fa-remove" clickFun="departmentInfo.delete()" space="true"/>
+
+
+
+                        </div>
+                        <#table id="departmentInfoTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/sm/departmentInfo/departmentInfo.js"></script>
+@}

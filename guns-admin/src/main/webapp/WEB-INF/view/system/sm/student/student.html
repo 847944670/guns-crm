@@ -1,0 +1,41 @@
+<@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>我的学生信息管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="condition" name="名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="student.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="studentTableToolbar" role="group">
+
+                            <#button name="新建学生信息" icon="fa-plus" clickFun="student.openAddstudent()"/>
+
+
+                            <#button name="编辑学生信息" icon="fa-edit" clickFun="student.openStudentDetail()" space="true"/>
+
+
+                            <#button name="删除学生信息" icon="fa-remove" clickFun="student.delete()" space="true"/>
+
+
+
+
+                        </div>
+                        <#table id="studentTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/sm/student/student.js"></script>
+@}

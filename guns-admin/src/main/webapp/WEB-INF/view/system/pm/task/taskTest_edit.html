@@ -1,0 +1,29 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row btn-group-m-t">
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <!--                            <#input id="id" name="" value="${item.id}" underline="true"/>-->
+                    <#input id="name" name="任务名称" value="${item.name}" underline="true"/>
+                    <#input id="projectName" name="所在项目" value="${item.projectName}" underline="true"/>
+                    <#input id="moduleName" name="所在模块" value="${item.moduleName}" underline="true"/>
+
+                </div>
+
+
+
+                <div class="col-sm-6">
+                    <#input id="funName" name="需要完成的功能" value="${item.funName}" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@}

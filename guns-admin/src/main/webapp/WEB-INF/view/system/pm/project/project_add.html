@@ -1,0 +1,93 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="projectInfoForm">
+            <div style="display: none" id="f"></div>
+            <input type="hidden" name="marks" id="marks" value=""/>
+            <input type="hidden" name="attachmentName" id="attachmentName" value=""/>
+            <input type="hidden" name="fileId" id="fileId" value=""/>
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="projectName" name="项目名称"  underline="true"/>
+                    <#input id="projectDescription" name="项目描述"  underline="true"/>
+                </div>
+                <div class="col-sm-6 b-r">
+                    <#input id="startTime" name="项目开始时间"  underline="true"/>
+                    <#input id="endTime" name="项目结束时间"  underline="true"/>
+                </div>
+
+                <div class="col-sm-12 b-r">
+                    <div id="uploader" class="wu-example">
+                        <!--用来存放文件信息-->
+                        <div id="thelist" class="uploader-list"></div>
+                        <div class="btns">
+                            <div id="ctlBtnId">选择文件</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-12 b-r">
+                    <script src="${ctxPath}/static/wangEditor/release/wangEditor.js"></script>
+                    <div id="marks1">
+                        <p>请输入项目具体信息</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="projectInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="projectInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/pm/project/project_info.js"></script>
+<script>
+    //存放附件名称的数组
+    var value =new Array();
+    //存放附件Id数组
+    var fileIds =new Array();
+    laydate.render({
+        elem: '#startTime'
+    });
+    laydate.render({
+        elem: '#endTime'
+    });
+    function deleteFile(file,attachName){
+        var fileId = getFileId(file);
+        file.remove();
+        var attachArray = new Array();
+        var arr = $("#attachmentName").val().split(",");
+        for (var i in arr){
+            attachArray.push(arr[i]);
+        }
+        attachArray.splice($.inArray(attachName,attachArray),1);
+        value.splice($.inArray(attachName,value),1);
+        fileIds.splice($.inArray(fileId,fileIds),1);
+
+        $("#attachmentName").val(attachArray);
+        $("#fileId").val(fileIds);
+        //后端删除附件
+        var ajax = new $ax(Feng.ctxPath + "/attachment/delete", function(data){
+            Feng.success("删除成功!");
+        },function(data){
+            Feng.error("附件不存在!" + data.responseJSON.message + "!");
+        });
+        ajax.set("attachName",attachName);
+        ajax.set("type","add");
+        ajax.start();
+    }
+    function  getFileId(file){
+        $("#f").append(file);
+        var id = $("#f>div").attr("id");
+        return id;
+    }
+
+
+</script>
+@}

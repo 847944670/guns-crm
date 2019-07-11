@@ -1,0 +1,108 @@
+@layout("/common/_container.html"){
+<style>
+	 .box{
+		width: 100%;
+		margin:0 auto;
+		min-height: 100px;
+		border-radius: 3px;
+		-moz-box-shadow: 0px 0px 8px #c3c3c3; /* 老的 Firefox */
+		box-shadow: 0px 0px 8px #c3c3c3;
+		background-color: white;
+	}
+	.box-head{
+		height: 50px;
+		line-height: 50px;
+		padding-left:20px;
+		font-size: 14px;
+		border-bottom: 1px solid #e4e4e4;
+	}
+	.box-content{
+		padding: 30px 40px;
+	}
+	.text-left{
+		text-align: left !important;
+	}
+	.font-blue{
+		color: #3399ff;
+	}
+	.back-blue{
+		background-color: #3399ff;
+	}
+	.box-content select{
+		padding-left:15px;
+		margin-left:15px;
+		width: 50%;
+		height: 32px;
+		border-radius: 3px;
+	}
+	select option{
+		height: 32px;
+	}
+    #title{
+		width: 100%;
+		font-size: 16px;
+		text-align: center;
+		padding: 25px 20px 15px;
+	}
+	.box-btn{
+		padding: 15px;
+		text-align: center;
+	}
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>客户管理管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="condition" name="名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="CrmCustomer.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="CrmCustomerTableToolbar" role="group">
+                            @if(shiro.hasPermission("/crmCustomer/add")){
+                                <#button name="添加我的客户" icon="fa-plus" clickFun="CrmCustomer.openAddCrmCustomer()"/>
+                            @}
+                            @if(shiro.hasPermission("/crmCustomer/update")){
+                                <#button name="修改" icon="fa-edit" clickFun="CrmCustomer.openCrmCustomerDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/crmCustomer/delete")){
+                                <#button name="删除" icon="fa-remove" clickFun="CrmCustomer.delete()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/crmCustomer/tuihui")){
+                                <#button name="退回公海" icon="fa-undo" clickFun="CrmCustomer.tuihui()" space="true"/>
+                            @}
+                            <#button name="查看" icon="fa-eye" clickFun="CrmCustomer.look()" space="true"/>
+                            @if(shiro.hasPermission("/crmCustomer/transfer")){
+                                <#button name="转移" icon="fa-refresh" clickFun="CrmCustomer.transfer()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="CrmCustomerTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 转移阶段box -->
+<div id="zhbox" class="box" style="display: none;min-height: 80%;">
+	<div id="title"><h3>是否将销售机会转移给其他负责人？转移成功之后，该操作将无法恢复。</h3></div>
+	<div class="box-content">
+	    <span>新负责人</span>
+	    <select id="newXyrId">
+	    </select>
+	</div>
+	<div class="box-btn" style="margin-top: 10px;border-top:1px solid #e4e4e4;">
+		<button class="back-blue btn" style="margin-right: 10px;color:white;" onclick="CrmCustomer.transferTijiao()">确认</button>
+		<button class="btn" onclick="layer.closeAll();">取消</button>
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/crm/crmCustomer/crmCustomer.js"></script>
+@}

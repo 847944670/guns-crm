@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.WeeklyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Weekly">
+        <id column="id" property="id" />
+        <result column="usernid" property="usernid" />
+        <result column="name" property="name" />
+        <result column="weekly" property="weekly" />
+        <result column="time" property="time" />
+        <result column="userid" property="userid" />
+        <result column="roleid" property="roleid" />
+        <result column="deptid" property="deptid" />
+        <result column="extendone" property="extendone" />
+        <result column="extendtwo" property="extendtwo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, usernid, name, weekly, time, userid, roleid, deptid, extendone, extendtwo
+    </sql>
+
+</mapper>

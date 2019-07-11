@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.stylefeng.guns.modular.system.dao.CrmSalechanceMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap"
+		type="com.stylefeng.guns.modular.system.model.CrmSalechance">
+		<id column="id" property="id" />
+		<result column="customerId" property="customerId" />
+		<result column="createDate" property="createDate" />
+		<result column="changeType" property="changeType" />
+		<result column="saleId" property="saleId" />
+		<result column="amount" property="amount" />
+		<result column="unitPrice" property="unitPrice" />
+		<result column="number" property="number" />
+		<result column="fstate" property="fstate" />
+		<result column="finishDate" property="finishDate" />
+		<result column="IsDelete" property="IsDelete" />
+		<result column="other1" property="other1" />
+		<result column="other2" property="other2" />
+		<result column="other3" property="other3" />
+	</resultMap>
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		id, customerId, createDate, changeType, saleId, amount,
+		fstate,
+		finishDate, IsDelete, other1, other2, other3,unitPrice,number
+	</sql>
+
+	<select id="getSalesChanceDetail" resultType="map">
+		SELECT
+		a.id,
+		a.saleId,
+		b.NAME AS salesName,
+		a.changeType,
+		d.NAME AS
+		changeName,
+		a.amount,
+		a.fstate,
+		f.NAME AS stateName,
+		a.finishDate,
+		a.createDate,
+		a.IsDelete,
+		a.customerId,
+		g.customerName,
+		a.unitPrice,
+		a.number
+		FROM
+		co_crm_salechance a
+		LEFT JOIN sys_user b ON a.saleId = b.id
+		LEFT
+		JOIN
+		sys_dict c ON c.CODE = 'saleChance'
+		LEFT JOIN sys_dict d ON
+		c.id =
+		d.pid AND a.changeType = d.num
+		LEFT JOIN sys_dict e ON e.CODE =
+		'saleState'
+		LEFT JOIN sys_dict f ON e.id = f.pid AND a.fstate = f.num
+		LEFT JOIN co_crm_customer g ON a.customerId = g.id
+		<where>
+			a.IsDelete = 1
+			<if test="crmSalechanceId != null">and a.id = #{crmSalechanceId}</if>
+		</where>
+		ORDER BY
+		a.createDate DESC
+	</select>
+
+	<select id="getChanceList" resultType="map">
+		SELECT
+		a.id,
+		a.saleId,
+		b.NAME AS salesName,
+		a.changeType,
+		d.NAME AS
+		changeName,
+		a.amount,
+		a.fstate,
+		f.NAME AS stateName,
+		a.finishDate,
+		a.createDate,
+		a.IsDelete,
+		a.customerId,
+		g.customerName,
+		a.unitPrice,
+		a.number
+		FROM
+		co_crm_salechance a
+		LEFT JOIN sys_user b ON a.saleId = b.id
+		LEFT
+		JOIN
+		sys_dict c ON c.CODE = 'saleChance'
+		LEFT JOIN sys_dict d ON
+		c.id =
+		d.pid AND a.changeType = d.num
+		LEFT JOIN sys_dict e ON e.CODE =
+		'saleState'
+		LEFT JOIN sys_dict f ON e.id = f.pid AND a.fstate = f.num
+		LEFT JOIN co_crm_customer g ON a.customerId = g.id
+		<where>
+			a.IsDelete = 1
+			<if test="customId != null">and a.customerId = #{customId}</if>
+			<if test="saleState != null">and a.fstate = #{saleState}</if>
+		</where>
+		ORDER BY
+		a.createDate DESC
+	</select>
+
+</mapper>

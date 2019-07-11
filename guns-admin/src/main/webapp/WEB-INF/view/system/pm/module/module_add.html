@@ -1,0 +1,46 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="moduleInfoForm">
+            <input type="hidden" name="marks" id="marks" value=""/>
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="moduleName" name="模块名称"  underline="true"/>
+                    <#input id="moduleDescription" name="模块描述"  underline="true"/>
+                    <#select id="projectId" name="所在项目" underline="true">
+                        @for(project in projectList){
+                        <option value="${project.id}">${project.projectName}</option>
+                        @}
+                    </#select>
+                </div>
+                <div class="col-sm-6 b-r">
+                    <#input id="startTime" name="开始时间"  underline="true"/>
+                    <#input id="endTime" name="结束时间"  underline="true"/>
+                </div>
+                <div class="col-sm-12 b-r">
+                    <script src="${ctxPath}/static/wangEditor/release/wangEditor.js"></script>
+                    <div id="marks1">
+                        <p>请输入模块具体信息</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="moduleInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="moduleInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/pm/module/module_info.js"></script>
+<script>
+    laydate.render({
+        elem: '#startTime'
+    });
+    laydate.render({
+        elem: '#endTime'
+    });
+</script>
+@}

@@ -1,0 +1,83 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <input type="hidden" id="testOfUserName1" name="testOfUserName" value="${item.testOfUserName}">
+            <input type="hidden" id="type" name="type" value="${item.type}">
+            <input type="hidden" id="operationOfUserName" name="operationOfUserName" value="${item.operationOfUserName}">
+            <input type="hidden" id="statusOfOperationName" name="statusOfOperationName" value="${item.statusOfOperationName}">
+            <input type="hidden" id="testBug1" name="testBug" value="${item.testBug}">
+            <div class="row">
+                <div class="col-sm-12 b-r">
+
+                    <ul class="list-group ">
+                        <div disabled="true" id="testOfUserName"></div>
+                        <li class="list-group-item"><h4>任务创建者:</h4>${item.createUser}</li>
+                        <li class="list-group-item"><h4>任务执行人：</h4>
+                            <span class="label label-default">
+                                ${item.getTaskUserName}
+                            </span>
+                        </li>
+                        <li class="list-group-item"><h4>任务名称:</h4>${item.name}</li>
+                        <li class="list-group-item"><h4>任务状态:</h4><span class="label label-danger">${item.statusName}</span></li>
+                        <li class="list-group-item"><h4>任务需求:</h4>${item.marks}</li>
+                        ${html}
+                        <li class="list-group-item"><h4>所在项目:</h4>${item.projectName}</li>
+                        <li class="list-group-item"><h4>所在模块:</h4>${item.moduleName}</li>
+                        <li class="list-group-item"><h4>项目研发周期(单位:天):</h4>
+                            ${item.projectTime}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <h4>是否延时:</h4><font color="#FF0000">${item.isDelayOfProject==true?"是":"否"}</font>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <h4>延时天数:</h4>
+                            <font color="#FF0000">${item.delayDayOfProject==null ? "无":item.delayDayOfProject}</font>
+                            </li>
+                        <li class="list-group-item"><h4>模块研发周期(单位:天):</h4>
+                            ${item.moduleTime}&nbsp;&nbsp;&nbsp;&nbsp;
+                            <h4>是否延时:</h4>
+                            <font color="#FF0000"> ${item.isDelayOfModule==true?"是":"否"}</font>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <h4>延时天数:</h4>
+                            <font color="#FF0000"> ${item.delayDayOfModule==null ? "无":item.delayDayOfModule}</font>
+                           </li>
+                        <li class="list-group-item"><h4>功能开发周期(单位:天):</h4>
+                            ${item.functionTime}&nbsp;&nbsp;&nbsp;&nbsp;
+                            <h4>是否延时:</h4>
+                            <font color="#FF0000">${item.isDelayOfFunction==true?"是":"否"==true?"是":"否"}</font>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <h4>延时天数:</h4>
+                            <font color="#FF0000">  ${item.delayDayOfFunction==null ? "无":item.delayDayOfFunction}</font>
+                           </li>
+
+                        <li class="list-group-item"><h4>测试状态:</h4>
+                            <span class="label label-danger">
+                                ${item.statusOfTest=="0" ? "研发中..测试未开启":item.statusOfTestName}
+                            </span>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/pm/task/task_info.js"></script>
+<script>
+    function downloadFile(fileName,sourceFileName){
+        var ajax = new $ax(Feng.ctxPath + "/myTask/downLoad", function (data) {
+                $('#'+fileName.substring(0,14)).html("<span ><font color='#1d2bff'>"+data.path+"</font></span>");
+                Feng.success("下载成功!");
+
+
+        }, function (data) {
+            Feng.error("下载失败!" + data.msg + "!");
+        });
+        ajax.set("fileName",fileName);
+        ajax.set("sourceFileName",sourceFileName);
+        ajax.start();
+    }
+</script>
+@}

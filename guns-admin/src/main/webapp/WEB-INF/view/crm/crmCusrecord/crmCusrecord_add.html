@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="GJjhInfo">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <!-- <#input id="id" name="" underline="true"/> -->
+                            <input id="customerId" name="customerId" value="${customerId!}" type="hidden"/>
+                            <!-- <#input id="createDate" name="跟进记录时间" underline="true"/> -->
+                            <!-- <#input id="IsDelete" name="删除标识符" underline="true"/> -->
+                            <#dictSelector id="followType" name ="跟进机会类型" code="followType" readonly="false" label="跟进机会类型"  underline="true"  />
+                           <!--  <#input id="followType" name="跟进机会类型" underline="true"/> -->
+                            <#input id="followBuiness" name="跟进业务" underline="true" required="true"/>
+                            <#input id="followDetail" name="跟进详情" underline="true" required="true"/>
+                            <!-- <#input id="salerId" name="销售人员ID" underline="true"/> -->
+                </div>
+
+              <!--   <div class="col-sm-6">
+                            
+                            <#input id="other1" name="其他1" underline="true"/>
+                            <#input id="other2" name="其他2" underline="true"/>
+                            <#input id="other3" name="其他3" underline="true"/>
+                </div> -->
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CrmCusrecordInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CrmCusrecordInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/crm/crmCusrecord/crmCusrecord_info.js"></script>
+@}

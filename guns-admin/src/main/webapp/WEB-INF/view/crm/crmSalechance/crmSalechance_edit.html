@@ -1,0 +1,37 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="customerId" name="客户UUID" value="${item.customerId}" underline="true"/>
+                            <#input id="createDate" name="销售机会时间" value="${item.createDate}" underline="true"/>
+                            <#input id="changeType" name="销售机会类型" value="${item.changeType}" underline="true"/>
+                            <#input id="saleId" name="销售人员ID" value="${item.saleId}" underline="true"/>
+                            <#input id="amount" name="销售金额" value="${item.amount}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="fstate" name="销售状态" value="${item.fstate}" underline="true"/>
+                            <#input id="finishDate" name="结单日期" value="${item.finishDate}" underline="true"/>
+                            <#input id="IsDelete" name="删除标识符" value="${item.IsDelete}" underline="true"/>
+                            <#input id="other1" name="其他1" value="${item.other1}" underline="true"/>
+                            <#input id="other2" name="其他2" value="${item.other2}" underline="true"/>
+                            <#input id="other3" name="其他3" value="${item.other3}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CrmSalechanceInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CrmSalechanceInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/crm/crmSalechance/crmSalechance_info.js"></script>
+@}

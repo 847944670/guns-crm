@@ -1,0 +1,52 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="MyInfoForm">
+
+            <div class="row">
+                <div class="col-sm-10">
+                            <input id="id" name="id" value="${item.id}" type="hidden"/> 
+                            <#input id="customerName" name="客户名称" value="${item.customerName}" underline="true"/>
+                            <#input id="customerMess" name="客户简称" value="${item.customerMess}" underline="true"/>
+                            <#dictSelector id="customerHy" name ="客户行业" code="customerHy" readonly="false" label="客户行业"  value="${item.customerHy}" underline="true"  />
+                           <!--  <#input id="customerHy" name="客户行业" value="${item.customerHy}" underline="true"/> -->
+                            <#dictSelector id="customerStar" name ="客户星级" code="test_star" readonly="false" label="客户星级"  value="${item.customerStar}" underline="true"  />
+                           <!--  <#input id="customerStar" name="客户星级" value="${item.customerStar}" underline="true"/> -->
+                            <input id="createTime" name="createTime" value="${item.createTime!,dateFormat='yyyy-MM-dd HH:mm:ss'}" type="hidden"/>
+                            <#dictSelector id="customerState" name ="客户状态" code="customState" readonly="false" label="客户状态"  value="${item.customerState}" underline="true"  />
+                            <!-- <#input id="customerState" name="跟进状态" value="${item.customerState}" underline="true"/> -->
+                            <#input id="customerRelation" name="联系人" value="${item.customerRelation}" underline="true"/>
+                            <#input id="cusPhoneNum" name="客户联系电话" value="${item.cusPhoneNum}" underline="true"/>
+                            <#input id="area" name="地区" value="${item.area}" underline="true"/>
+                            <#input id="address" name="详细地址" value="${item.address}" />
+                            <#input id="www" name="客户官网" value="${item.www}" underline="true"/>
+                            <#input id="customerFrom" name="客户来源" value="${item.customerFrom}" underline="true"/>
+                            <#input id="customerRemark" name="备注" value="${item.customerRemark}" underline="true"/>
+                            <input id="salerName" name="salerName" value="${item.salerName}" type="hidden"/>
+                            @if(item.salerCreateTime != null){
+                            <input id="salerCreateTime" name="salerCreateTime" value="${item.salerCreateTime!,dateFormat='yyyy-MM-dd HH:mm:ss'}"type="hidden"/>
+                            @}
+                            <input id="salerId" name="salerId" value="${item.salerId}" type="hidden"/>
+                            <input id="IsDelete" name="IsDelete" value="${item.IsDelete}" type="hidden"/>
+                </div>
+
+                <!-- <div class="col-sm-6">
+                            
+                            <#input id="other1" name="其他1" value="${item.other1}" underline="true"/>
+                            <#input id="other2" name="其他2" value="${item.other2}" underline="true"/>
+                            <#input id="other3" name="其他3" value="${item.other3}" />
+                </div> -->
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CrmCustomerInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CrmCustomerInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/crm/crmCustomer/crmCustomer_info.js"></script>
+@}

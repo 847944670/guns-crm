@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="customerId" name="客户UUID" value="${item.customerId}" underline="true"/>
+                            <#input id="createDate" name="跟进记录时间" value="${item.createDate}" underline="true"/>
+                            <#input id="IsDelete" name="删除标识符" value="${item.IsDelete}" underline="true"/>
+                            <#input id="followType" name="跟进机会类型" value="${item.followType}" underline="true"/>
+                            <#input id="followBuiness" name="跟进业务" value="${item.followBuiness}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="followDetail" name="跟进详情" value="${item.followDetail}" underline="true"/>
+                            <#input id="salerId" name="销售人员ID" value="${item.salerId}" underline="true"/>
+                            <#input id="other1" name="其他1" value="${item.other1}" underline="true"/>
+                            <#input id="other2" name="其他2" value="${item.other2}" underline="true"/>
+                            <#input id="other3" name="其他3" value="${item.other3}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CrmCusrecordInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CrmCusrecordInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/crm/crmCusrecord/crmCusrecord_info.js"></script>
+@}

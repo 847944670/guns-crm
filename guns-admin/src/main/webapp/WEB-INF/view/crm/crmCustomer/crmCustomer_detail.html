@@ -1,0 +1,580 @@
+@layout("/common/_container.html"){
+<link href="${ctxPath}/static/layui/css/layui.css" rel="stylesheet"/>
+<link href="${ctxPath}/static/css/bootstrap-directional-buttons.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="${ctxPath}/static/css/follow-up.css?1">
+<style>
+	table tr,td,th{
+		text-align: center;
+	}
+	 .time-content{
+    	-moz-box-shadow: 0px 0px 2px #e4e4e4; /* 老的 Firefox */
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.0470588235294118);
+    	width: 70%;
+    	padding:10px;
+    	border:1px solid rgba(235, 235, 235, 1);
+    	border-radius: 3px;
+    	text-align: left;
+    	background: #fff;
+    }
+    .back-blue{
+		background-color: #3399ff;
+	}
+	.layui-timeline-axis{
+    	color: #e4e4e4;
+    }
+    .layui-timeline-axi,.active{
+    	color: #3399ff;
+    }
+    .layui-this:after{
+    	border-color: #3399ff !important;
+    }
+    .layui-this{
+    	color: #3399ff !important;
+    }
+    .box{
+		width: 90%;
+		margin:0 auto;
+		min-height: 100px;
+		border-radius: 3px;
+		-moz-box-shadow: 0px 0px 8px #c3c3c3; /* 老的 Firefox */
+		box-shadow: 0px 0px 8px #c3c3c3;
+		background-color: white;
+	}
+	.box-head{
+		height: 50px;
+		line-height: 50px;
+		padding-left:20px;
+		font-size: 14px;
+		border-bottom: 1px solid #e4e4e4;
+	}
+	.box-content{
+		padding: 30px 40px;
+	}
+	.text-left{
+		text-align: left !important;
+	}
+	.font-blue{
+		color: #3399ff;
+	}
+	.back-blue{
+		background-color: #3399ff;
+	}
+	.margin-top-20{
+		margin-top: 20px;
+	}
+	.btn-item-last::after {
+		content: none !important;
+	}
+	.btn-item-first::before {
+		content: none !important;
+	}
+	.btn-item{
+		border-radius: 4px !important;
+	}
+	.btn-arrow-right{
+		padding-right: 50px !important;
+		padding-left: 70px !important;
+	}
+	.btn:focus,
+        .btn:active:focus,
+        .btn.active:focus,
+        .btn.focus,
+        .btn:active.focus,
+        .btn.active.focus {
+            outline: none;    
+            box-shadow:none
+        }
+    .btn-active{
+    	color:white;
+    	background-color: #3399ff;
+    }
+    .time-content{
+    	-moz-box-shadow: 0px 0px 2px #e4e4e4; /* 老的 Firefox */
+		box-shadow: 0px 0px 2px #e4e4e4;
+    	width: 50%;
+    	padding:10px;
+    	border:1px solid #e4e4e4;
+    	border-radius: 3px;
+    }
+    .layui-timeline-axis{
+    	color: #e4e4e4;
+    }
+    .layui-timeline-axi,.active{
+    	color: #3399ff;
+    }
+    #bgbox{
+    	background: white;
+    }
+    #title{
+		width: 100%;
+		font-size: 16px;
+		text-align: center;
+		padding: 25px 20px 15px;
+	}
+	.box-content lable{
+		
+	}
+	.box-content select{
+		padding-left:15px;
+		margin-left:15px;
+		width: 50%;
+		height: 32px;
+		border-radius: 3px;
+	}
+	select option{
+		height: 32px;
+	}
+	.box-btn{
+		padding: 15px;
+		text-align: center;
+	}
+	#title1{
+		width: 100%;
+		background: #f2f2f2;
+		padding: 15px;
+		font-size: 16px;
+	}
+	.form-div{
+		font-size:14px;
+		width: 80%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-start;
+		min-height: 30px;
+		padding: 5px;
+		margin-top: 10px;
+	}
+	.form-lable{
+		height: 30px;
+		width: 100px;
+		margin-right: 20px;
+		text-align: right;
+	}
+	.form-context{
+		flex:1;
+	}
+	.radio-lable{
+		margin-right: 10px;
+	}
+    
+</style>
+<div  id="crmChance">
+
+<div id="customer-details">
+	<!-- 变更阶段box -->
+	<div id="bgbox" style="display: none;min-height: 80%;">
+		<div id="title"><h3>变更销售阶段</h3></div>
+		<div class="box-content">
+		    <span>销售阶段</span>
+		    <select id="xsjdId">
+		        <option value="1">初步接触</option>
+		        <option value="2">需求确定</option>
+		        <option value="3">方案报价</option>
+		        <option value="4">谈判审核</option>
+		        <option value="5">赢单</option>
+		        <option value="6">输单</option>
+		    </select>
+		</div>
+		<div class="box-btn" style="margin-top: 10px;border-top:1px solid #e4e4e4;">
+			<button class="back-blue btn" style="margin-right: 10px;color:white;" v-on:click="changeTijiao">确认</button>
+			<button class="btn" v-on:click="closeChangeBox">取消</button>
+		</div>
+	</div>
+	<div id="chanceDetail" style="display: none;min-height: 80%;width:100%;padding-top: 40px;">
+	  	<!-- 销售机会 -->
+	    <div class="box">
+	    	<div class="box-head">
+	    	   <span>销售机会信息 </span>
+	    	   <button type="button" style="margin-right: 20px;margin-top: 10px;" class="layui-btn layui-btn-primary  layui-btn-sm pull-right" onclick="layer.closeAll();">返回</button> 
+	    	</div>
+	    	<div class="box-content">
+	    	   <form class="form-horizontal" role="form">
+				  <div class="form-group">
+				    <span for="firstname" class="col-sm-2 control-label">销售机会：</span>
+				    <div><span class="col-sm-2 control-label text-left">{{chance.changeName}}</span></div>
+				    <span for="firstname" class="col-sm-2 control-label">所有人：</span>
+				    <div>
+				    	<span class="col-sm-1 control-label text-left">{{chance.salesName}}</span>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <span for="firstname" class="col-sm-2 control-label">客户名称：</span>
+				    <div><span class="col-sm-2 control-label text-left font-blue">{{chance.customerName}}</span></div>
+			      </div>
+			      <div class="form-group">
+				    <span for="firstname" class="col-sm-2 control-label">结单日期：</span>
+				    <div><span class="col-sm-4 control-label text-left">{{chance.finishDate}}</span></div>
+			      </div>
+			      <div class="form-group">
+				    <span for="firstname" class="col-sm-2 control-label">销售金额：</span>
+				    <div><span class="col-sm-2 control-label text-left">{{chance.amount}}</span></div>
+				    <span for="firstname" class="col-sm-2 control-label">销售单价：</span>
+				    <div><span class="col-sm-2 control-label text-left">{{chance.unitPrice}} </span></div>
+				    <span for="firstname" class="col-sm-2 control-label">销售数量：</span>
+				    <div><span class="col-sm-2 control-label text-left">{{chance.number}} </span></div>
+			      </div>
+			   </form>
+	    	</div>
+	    </div>
+	    <!-- 销售阶段 -->
+	    <div class="box margin-top-20">
+	    	<div class="box-head">销售阶段</div>
+	    	<div class="box-content">
+	    		<div class="" style="font-size: 12px !important;">
+		    		<button v-if="chanceState >= 1" type="button" class="btn-item-first btn-lg btn-item btn btn-arrow-right btn-active">初步接触</button>
+	    			<button v-else type="button" class="btn-lg btn-item btn btn-arrow-right">初步接触</button>
+
+					<button v-if="chanceState >= 2" type="button" class="btn-item btn btn-lg btn-arrow-right btn-active">需求确定</button>
+	    			<button v-else type="button" class="btn-item btn btn-lg btn-arrow-right">需求确定</button>
+					
+					<button v-if="chanceState >= 3" type="button" class="btn-item btn btn-lg btn-arrow-right btn-active">方案报价</button>
+	    			<button v-else type="button" class="btn-item btn btn-lg btn-arrow-right">方案报价</button>
+					
+					<button v-if="chanceState >= 4" type="button" class="btn-item btn btn-lg btn-arrow-right btn-active">谈判审核</button>
+	    			<button v-else type="button" class="btn-item btn btn-lg btn-arrow-right">谈判审核</button>
+					
+					<button v-if="chanceState == 5" type="button" class="btn-item btn-item-last btn btn-lg btn-active btn-arrow-right">&nbsp;&nbsp;&nbsp;&nbsp;赢单&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<button v-if="chanceState == 6" type="button" class="btn-item btn-item-last btn btn-lg btn-active btn-arrow-right">&nbsp;&nbsp;&nbsp;&nbsp;输单&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					
+					<button v-if="chanceState != 5 && chanceState != 6" type="button" class="btn-item btn-item-last btn btn-lg btn-arrow-right">&nbsp;&nbsp;&nbsp;&nbsp;赢单&nbsp;&nbsp;&nbsp;&nbsp;</button>
+	    			<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-left: 40px;" v-on:click="change()">变更</button>
+	    		</div>
+	    	</div>
+    	</div>
+   	</div>
+    <div class="details">
+           <div class="company-information information">
+               <h3>${crmCustomer.customerName!}</h3>
+               <input id="id"  value="${crmCustomer.id}" type="hidden"/>
+               <div class="content">
+                   <span class="content-title">客户状态：</span>
+                   <span class="content-text">${customerState}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">重要程度：</span>
+                  <span class="content-text" id="test1">${crmCustomer.customerStar}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">负责人：</span>
+                   <span class="content-text">${crmCustomer.salerName!}</span>
+               </div>
+           </div>
+
+           <div class="detailed-information information">
+               <div class="content">
+                   <span class="content-title">客户名称：</span>
+                   <span class="content-text">${crmCustomer.customerName!}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">客户简称：</span>
+                   <span class="content-text">${crmCustomer.customerMess!}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">客户行业：</span>
+                   <span class="content-text">${customerHy}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">联系电话：</span>
+                   <span class="content-text">${crmCustomer.cusPhoneNum!}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">地区：</span>
+                   <span class="content-text">${crmCustomer.area!}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">详细地址：</span>
+                   <span class="content-text">${crmCustomer.address!}</span>
+               </div>
+           </div>
+           <div class="source information">
+               <div class="content">
+                   <span class="content-title">客户来源：</span>
+                   <span class="content-text">${crmCustomer.customerFrom!}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">客户官网：</span>
+                   <span class="content-text">${crmCustomer.www!}</span>
+               </div>
+           </div>
+           <div class="remarks information">
+               <div class="content">
+                   <span class="content-title">创建时间：</span>
+                   <span class="content-text">${crmCustomer.createTime!,dateFormat='yyyy-MM-dd HH:mm:ss'}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">创建人：</span>
+                   <span class="content-text">${crmCustomer.salerName!}</span>
+               </div>
+               <div class="content">
+                   <span class="content-title">备注：</span>
+                   <span class="content-text">${crmCustomer.customerRemark!}</span>
+               </div>
+           </div>
+       </div>
+      <div id="follow-up" class="ax-default">
+      		<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin: 0 0 !important;">
+		  <ul class="layui-tab-title" style="background: #fff;">
+		    <li class="layui-this">销售动态</li>
+		    <li>跟进记录</li>
+		  </ul>
+		  <div class="layui-tab-content">
+		  	
+		  	<div class="layui-tab-item layui-show">
+		  		<div class="condition" style="margin: 15px 10px;">
+			  		<label>过滤条件</label>
+			  		<label for="r5" class="radio-lable"><input v-bind:checked="saleState == 0" type="checkbox" value="0" name="saleState" v-on:click="check(0)">全部</label>
+				    <label for="r6" class="radio-lable"><input v-bind:checked="saleState == 1" type="checkbox" value="1" name="saleState" v-on:click="check(1)">初步接触</label>
+				    <label for="r6" class="radio-lable"><input v-bind:checked="saleState == 2" type="checkbox" value="2" name="saleState" v-on:click="check(2)">需求确定</label>
+				    <label for="r6" class="radio-lable"><input v-bind:checked="saleState == 3" type="checkbox" value="3" name="saleState" v-on:click="check(3)">方案报价</label>
+			  		<label for="r6" class="radio-lable"><input v-bind:checked="saleState == 4" type="checkbox" value="4" name="saleState" v-on:click="check(4)">谈判审核</label>
+			  		<label for="r6" class="radio-lable"><input v-bind:checked="saleState == 5" type="checkbox" value="5" name="saleState" v-on:click="check(5)">赢单</label>
+			  		<label for="r6" class="radio-lable"><input v-bind:checked="saleState == 6" type="checkbox" value="6" name="saleState" v-on:click="check(6)">输单</label>
+			  		<button type="button" class="layui-btn layui-btn-primary  layui-btn-sm pull-right" v-on:click="add">新增销售机会</button>
+			  	</div>
+			  	<div>
+			  		<table class="table table-bordered">
+					  <thead>
+					    <tr>
+					      <th width="5%">ID</th>
+					      <th >销售人员</th>
+					      <th width="10%">机会类型</th>
+					      <th>销售金额</th>
+					      <th>销售阶段</th>
+					      <th width="20%">结单日期</th>
+					      <th width="20%">创建时间</th>
+					      <th>操作</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr v-if="list.length > 0" v-for="item in list">
+					      <td>{{item.id}}</td>
+					      <td>{{item.salesName}}</td>
+					      <td>{{item.changeName}}</td>
+					      <td>{{item.amount}}</td>
+					      <td>{{item.stateName}}</td>
+					      <td>{{item.finishDate}}</td>
+					      <td>{{item.createDate}}</td>
+					      <td>
+					      	<button type="button" class="btn btn-primary btn-xs" v-on:click="lookChance(item.id)">查看</button>
+					      	<button type="button" class="btn btn-primary btn-xs" v-on:click="deleteChance(item.id)">删除</button>
+					      </td>
+					    </tr>
+					    <tr v-if="list.length <= 0">
+					    	<td colspan="8">暂无数据</td>
+					    </tr>
+					  </tbody>
+					</table>
+			  	</div>
+		  	</div>
+		  	<div class="layui-tab-item">
+		  		<!-- 更近机会 -->
+			    <div>
+			    	<div class="box-content">
+			    		<ul class="layui-timeline">
+			    		   <li class="layui-timeline-item">
+						    <i class="layui-icon layui-timeline-axis active">&#xe63f;</i>
+						    <div class="layui-timeline-content layui-text">
+						      <p class="time-content" style="text-align: center;">
+						      	<button style="color:white;height: 40px;padding: 10px 30px;" class="btn back-blue" onclick="CrmCusrecord.openAddCrmCusrecord()">点击增加更近记录</button>
+						      </p>
+						    </div>
+						  </li>
+						  @for(item in gjjl){
+						  	 <li class="layui-timeline-item">
+							    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+							    <div class="layui-timeline-content layui-text">
+							      <div class="layui-timeline-title" style="text-align: left;">${item.createDate!,dateFormat='yyyy-MM-dd HH:mm:ss'}
+							      	<span style="margin-left: 20px;fonr-size:12px !important;">${item.salerId!}</span>
+							      	<span style="margin-left: 20px;fonr-size:12px !important;">${item.followType}</span>
+							      </div>
+							      <p class="time-content">
+									${item.followDetail!}
+							        <span style="font-size: 12px;color:#c3c3c3;"><br>跟进机会：${item.followBuiness!}</span>
+							      </p>
+							    </div>
+							  </li>
+							  @}
+						</ul>
+			    	</div>
+			   	</div>
+		  	</div>
+		  </div>
+		</div>
+     </div>
+</div>
+</div>
+<script src="${ctxPath}/static/layui/layui.js"></script>
+<script src="${ctxPath}/static/js/vue/vue.min.js"></script>
+<script src="${ctxPath}/static/modular/crm/crmCusrecord/crmCusrecord.js"></script>
+<script>
+layui.use('element', function(){
+	  var $ = layui.jquery
+	  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+	  
+	  //触发事件
+	  var active = {
+	    tabAdd: function(){
+	      //新增一个Tab项
+	      element.tabAdd('demo', {
+	        title: '新选项'+ (Math.random()*1000|0) //用于演示
+	        ,content: '内容'+ (Math.random()*1000|0)
+	        ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+	      })
+	    }
+	    ,tabChange: function(){
+	      //切换到指定Tab项
+	      element.tabChange('demo', '22'); //切换到：用户管理
+	    }
+	  };
+	  
+	  $('.site-demo-active').on('click', function(){
+	    var othis = $(this), type = othis.data('type');
+	    active[type] ? active[type].call(this, othis) : '';
+	  });
+	  
+	  //Hash地址的定位
+	  var layid = location.hash.replace(/^#test=/, '');
+	  element.tabChange('test', layid);
+	  
+	  element.on('tab(test)', function(elem){
+	    location.hash = 'test='+ $(this).attr('lay-id');
+	  });
+});
+var rateNum = '${crmCustomer.customerStar}';
+layui.use('rate', function(){
+    var rate = layui.rate;
+    //渲染
+    var ins1 = rate.render({
+  	    elem: '#test1',
+  	    value: rateNum,
+  	    readonly: true
+  	 });
+  });
+var id = '${id}';
+var bgbox,xsjhbox;
+var crmChance = new Vue({
+	el: '#crmChance',
+	data:{
+		saleState: 0,
+		list:[],
+		chance:{},
+		chanceState: 1
+	},
+	methods:{
+		add: function(){
+			var index = layer.open({
+	            type: 2,
+	            area: ['800px', '550px'], //宽高
+	            fix: false, //不固定
+	            maxmin: true,
+	            content: Feng.ctxPath + '/crmSalechance/crmSalechance_add?customId=' + id
+	        });
+		},
+		getList:function(){
+			var that = this;
+			var saleState = that.saleState;
+			if(saleState == 0){
+				saleState = '';
+			}
+			$.ajax({
+		        url: Feng.ctxPath + '/crmSalechance/list?saleState=' + saleState + "&customId=" + id,
+		        success:function(data){
+		        	console.log(data);
+		        	that.list = data;
+		        } 
+			})
+		},
+		check: function(saleState){
+			this.saleState = saleState;
+			this.getList();
+		},
+		//删除
+		deleteChance: function(id){
+			var that = this;
+			layer.confirm('确认删除销售机会么？', {
+				  btn: ['确认','取消'] //按钮
+			}, function(){
+				$.ajax({
+			        url: Feng.ctxPath + '/crmSalechance/delete?crmSalechanceId=' + id,
+			        success:function(res){
+			        	if(res.code == 200 || res.code == '200'){
+							Feng.success("删除成功!");
+							layer.closeAll();
+							that.getList();
+						}else{
+							Feng.error(res.message);
+						}
+			        } 
+				})
+			}, function(){
+			  
+			});
+		},
+		lookChance: function(id){
+			this.chance = {};
+			var that = this;
+			$.ajax({
+		        url: Feng.ctxPath + '/crmSalechance/detail/' + id,
+		        success:function(res){
+		        	console.log(res)
+					that.chance = res;
+		        	that.chanceState = res.fstate;
+					xsjhbox = layer.open({
+						type: 1
+						,title: false //不显示标题栏
+					    ,closeBtn: false
+						,area: ['100%','100%']
+						,shade: 0.4
+						,id: 'addRecord1' //设定一个id，防止重复弹出
+						,resize: false
+					    ,content: $("#chanceDetail")
+					});
+		        } 
+			})
+		},
+		change: function(){
+			bgbox = layer.open({
+				type: 1
+				,title: false //不显示标题栏
+			    ,closeBtn: false
+				,area: '25%'
+				,shade: 0.4
+				,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+				,resize: false
+			    ,content: $("#bgbox")
+			});
+		},
+		closeChangeBox: function(){
+			layer.close(bgbox);
+		},
+		changeTijiao:function(){
+			var that = this;
+			var salesId = that.chance.id;
+			var fstateId = $("#xsjdId").val();
+			$.ajax({
+				url: Feng.ctxPath + "/crmSalechance/saveSalesChanceChange",
+				data:{
+					salesId: salesId,
+					fstateId: $("#xsjdId").val()
+				},
+				success:function(res){
+					if(res.code == 200 || res.code == '200'){
+						that.closeChangeBox();
+						Feng.success("变更成功！");
+						setTimeout("location.reload();", 500)
+						
+					}else{
+						Feng.error(res.message);
+					}
+				}
+			})
+		}
+	},
+	created:function(){
+		this.getList();
+	}
+})
+</script>
+@}

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.pm.task.dao.TaskDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.pm.task.entity.TaskEntity">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="employeerole" property="employeeRole"/>
+        <result column="deptname" property="deptName"/>
+        <result column="projectname" property="projectName"/>
+        <result column="projectid" property="projectId"/>
+        <result column="moduleName" property="moduleName"/>
+        <result column="moduleid" property="moduleId"/>
+        <result column="funname" property="funName"/>
+        <result column="funid" property="funId"/>
+        <result column="projecttime" property="projectTime"/>
+        <result column="moduletime" property="moduleTime"/>
+        <result column="functiontime" property="functionTime"/>
+
+        <result column="isdelayofproject" property="isDelayOfProject"/>
+        <result column="isdelayofmodule" property="isDelayOfModule"/>
+        <result column="isdelayoffunction" property="isDelayOfFunction"/>
+        <result column="delaydayofproject" property="delayDayOfProject"/>
+        <result column="delaydayofmodule" property="delayDayOfModule"/>
+        <result column="delaydayoffunction" property="delayDayOfFunction"/>
+        <result column="status" property="status"/>
+        <result column="statusname" property="statusName"/>
+        <result column="statusOftest" property="statusOfTest"/>
+        <result column="statusoftestname" property="statusOfTestName"/>
+        <result column="statusofoperation" property="statusOfOperation"/>
+        <result column="statusofoperationname" property="statusOfOperationName"/>
+        <result column="redeploystatus" property="redeployStatus"/>
+        <result column="redeploystatusname" property="redeployStatusName"/>
+        <result column="tasktype" property="taskType"/>
+        <result column="userid" property="userId"/>
+        <result column="testofuserId" property="testOfUserId"/>
+        <result column="testofuserName" property="testOfUserName"/>
+        <result column="operationofuserid" property="operationOfUserId"/>
+        <result column="operationofusername" property="operationOfUserName"/>
+        <result column="redeployuser" property="redeployUser"/>
+        <result column="gettaskusername" property="getTaskUserName"/>
+        <result column="createtaskuserdeptid" property="createTaskUserDeptId"/>
+        <result column="createtaskuserId" property="createTaskUserId"/>
+        <result column="testbug" property="testBug"/>
+        <result column="type" property="type"/>
+
+        <result column="marks" property="marks"/>
+        <result column="createdate" property="createDate"/>
+        <result column="updatedate" property="updateDate"/>
+        <result column="createuser" property="createUser"/>
+        <result column="updateuser" property="updateUser"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id,name,employeerole,deptname,projectname,modulename,funname,projecttime,moduletime
+        ,functiontime,isdelayofproject,isdelayofmodule,isdelayoffunction,delaydayofproject,
+        delaydayofmodule,delaydayoffunction,projectid,moduleid,funid,type ,
+        status,statusname,statusOftest,statusofoperation,tasktype,userid,
+        redeploystatus,redeployuser,gettaskusername,createtaskuserdeptid,statusoftestname,statusOfOperationName,
+        testofuserId,testofusername,operationofuserid,operationofusername,
+        createtaskuserId,testbug,marks,createdate,updatedate,createuser,updateuser
+    </sql>
+
+    <!--研发组普通员工通过任务状态(status:0位开启状态，1位关闭状态)和当前登录的用户id、当前部门id
+    查询上级研发组长下放的任务[我的任务]列表-->
+    <select id="selectMyTask"  resultMap="BaseResultMap" >
+      select <include refid="Base_Column_List"/>
+        from sys_pm_task where userid =#{userid} and createtaskuserdeptid=#{deptid}
+    </select>
+
+    <!--研发组长通过任务状态(status:0位开启状态，1位关闭状态)和当前登录的用户id、当前部门id
+    查询上级项目经理下放的任务和通过createUser(当前登录用户id)查询自己创建的任务-->
+    <select id="selectAllTask"  resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_pm_task where  createtaskuserdeptid=#{deptId} and createtaskuserId=#{createTaskUserId} or userid=#{userId}
+    </select>
+
+    <!--测试组普通员工通过测试状态(statusOfTst:0为进行状态，1为完成状态,2为无状态[非测试组成员或者未分配任务的测试组成员为无状态])
+    和当前登录的用户id、当前部门id查询自己创建的任务-->
+    <select id="selectMyTestTask"  resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_pm_task
+        where testofuserId=#{userid} and statusoftest='1'
+    </select>
+
+    <!--测试组组长通过测试状态(statusOfTst:0为进行状态，1为完成状态,2为无状态[非测试组成员或者未分配任务的测试组成员为无状态])-->
+    <select id="selectAllTestTask"  resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_pm_task where statusoftest='1'
+    </select>
+
+    <!--运维组组长通过测试状态(statusOfTst:0为进行状态，1为完成状态,2为无状态[非测试组成员或者未分配任务的测试组成员为无状态])-->
+    <select id="selectAllOperationTask"  resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_pm_task where createtaskuserdeptid=#{deptid} and statusoftest=0 or statusoftest='1'
+    </select>
+
+
+    <!--运维组普通员工通过测试状态(statusOfTst:0为进行状态，1为完成状态,2为无状态[非测试组成员或者未分配任务的测试组成员为无状态])
+    和当前登录的用户id、当前部门id查询自己创建的任务-->
+    <select id="selectMyOperationTask"  resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_pm_task where  operationofuserid=#{userid}
+
+    </select>
+
+    <!--查询普通员工已完成的任务-->
+    <select id="selectTaskEnd" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where status='1' and userid=#{userid}
+    </select>
+    <!--查询项目组长已完成的任务-->
+    <select id="selectTaskEndGroup" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where   createtaskuserid=#{createTaskUserId} and status='1' or userid=#{userId} and status='1' and createtaskuserdeptid=#{deptId}
+    </select>
+    <!--查询项目经理完成的任务-->
+    <select id="selectTaskEndManager" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where status='1'
+    </select>
+    <!--查询进行中的任务-->
+    <select id="selectTaskProgress" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where status='0' and userid=#{userid}
+
+    </select>
+    <!--查询项目组长进行中的任务-->
+    <select id="selectTaskProgressGroup" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where   createtaskuserid=#{createTaskUserId} and status='0' or userid=#{userId} and status='0' and createtaskuserdeptid=#{deptId}
+
+    </select>
+    <!--查询项目经理进行中的任务-->
+    <select id="selectTaskProgressManager" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where status='0'
+
+    </select>
+    <!--查询普通员工转派的任务-->
+    <select id="selectTaskRedeploy" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where status='0' and userid=#{userid} and redeploystatus='0'
+    </select>
+    <!--查询项目组长的范围内的测试任务-->
+    <select id="selectTestTaskGroup" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where status='1' and createtaskuserid=#{createTaskUserId} or userid=#{userId} and createtaskuserdeptid=#{deptId} and statusoftest='1'
+    </select>
+    <!--查询普通员工提交的测试任务-->
+    <select id="selectDevelopTestTask" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where userid=#{userid} and statusoftest='1'
+    </select>
+
+    <!--查询已经完成的测试任务-->
+    <!--查询项目经理已经完成的测试任务-->
+    <select id="selectTaskTestEndManager" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where statusOftest='2'
+    </select>
+
+    <!--查询项目组长已经完成的测试任务-->
+    <select id="selectTaskTestEndGroup" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where statusoftest='2' and testofuserId=#{createTaskUserId} or testofuserId=#{userId} and createtaskuserdeptid=#{deptId} and statusoftest='2'
+    </select>
+
+    <!--项目组成员查询已经完成的测试任务-->
+    <select id="selectTaskEndEmployee" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where testofuserId=#{userid} and statusoftest='2'
+    </select>
+
+    <!--测试组组长查询已经完成的测试任务-->
+    <select id="selectAllTestTaskEnd" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where statusOftest='2'
+    </select>
+
+    <!--测试组成员查询已经完成的测试任务-->
+    <select id="selectMyTestTaskEnd" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where testofuserId=#{userId} and statusoftest='2'
+    </select>
+
+
+    <!--查询全部进行中的任务-->
+    <select id="selectAllTaskProgress" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from  sys_pm_task where status='0' or statusoftest='1'
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.pm.project.dao.ProjectDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.pm.project.entity.Project">
+        <id column="id" property="id"/>
+        <result column="projectname" property="projectName"/>
+        <result column="projectdescription" property="projectDescription"/>
+        <result column="starttime" property="startTime"/>
+        <result column="endtime" property="endTime"/>
+        <result column="time" property="time"/>
+        <result column="fileid" property="fileId"/>
+        <result column="attachmentname" property="attachmentName"/>
+        <result column="marks" property="marks"/>
+        <result column="createdate" property="createDate"/>
+        <result column="updatedate" property="updateDate"/>
+        <result column="createuser" property="createUser"/>
+        <result column="updateuser" property="updateUser"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id,projectname,projectdescription,starttime,endtime,time,fileid,attachmentname,marks,createdate,updatedate,createuser,updateuser
+    </sql>
+    <select id="selectListCondition" resultMap="BaseResultMap">
+        <bind name="pattern" value="'%' + _parameter.projectName + '%'" />
+        select <include refid="Base_Column_List"/> from sys_pm_project where projectname like #{pattern}
+    </select>
+
+</mapper>

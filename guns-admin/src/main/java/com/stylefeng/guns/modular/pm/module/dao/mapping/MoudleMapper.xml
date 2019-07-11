@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.pm.module.dao.ModuleDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.pm.module.entity.Module">
+        <id column="id" property="id"/>
+        <result column="modulename" property="moduleName"/>
+        <result column="projectid" property="projectId"/>
+        <result column="projectname" property="projectName"/>
+        <result column="moduledescription" property="moduleDescription"/>
+        <result column="starttime" property="startTime"/>
+        <result column="endtime" property="endTime"/>
+        <result column="time" property="time"/>
+        <result column="createuserid" property="createUserId"/>
+        <result column="createuserdeptid" property="createUserDeptId"/>
+        <result column="accepteremployee" property="accepterEmployee"/>
+        <result column="marks" property="marks"/>
+        <result column="createdate" property="createDate"/>
+        <result column="updatedate" property="updateDate"/>
+        <result column="createuser" property="createUser"/>
+        <result column="updateuser" property="updateUser"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id,modulename,projectname,projectid,moduledescription,starttime,endtime,
+        createuserid,createuserdeptid,
+        time,accepteremployee,marks,createdate,updatedate,createuser,updateuser
+    </sql>
+
+    <select id="selectListCondition" resultMap="BaseResultMap">
+        <bind name="pattern" value="'%' + _parameter.moduleName + '%'" />
+        select <include refid="Base_Column_List"/> from sys_pm_module where modulename like #{pattern}
+    </select>
+
+    <select id="selectByProjectId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_pm_module where projectid=#{projectId}
+    </select>
+
+    <select id="selectMyModuleList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from sys_pm_module where createuserid=#{id} and createuserdeptid=#{deptId}
+    </select>
+
+</mapper>

@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>我的项目功能管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="condition" name="名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="employeeRole.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="employeeRoleTableToolbar" role="group">
+                            @if(shiro.hasPermission("/employeeRole/add")){
+                                <#button name="新建角色" icon="fa-plus" clickFun="employeeRole.openAddemployeeRole()"/>
+                            @}
+                            @if(shiro.hasPermission("/employeeRole/update")){
+                                <#button name="编辑角色" icon="fa-edit" clickFun="employeeRole.openEmployeeRoleDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/employeeRole/delete")){
+                                <#button name="删除角色" icon="fa-remove" clickFun="employeeRole.delete()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="employeeRoleTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/pm/employeeRole/employeeRole.js"></script>
+@}

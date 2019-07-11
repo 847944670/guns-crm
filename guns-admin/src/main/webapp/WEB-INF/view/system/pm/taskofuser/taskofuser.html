@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<script>
+    var idP="${id}"
+    var typeP="${type}"
+</script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>员工列表</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <#table id="taskOfUserTable"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="确定" id="ensure" icon="fa-check" clickFun="taskofUser.taskdown(idP,typeP)"/>
+
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="taskofUser.close()"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/pm/taskofuser/taskofuser.js"></script>
+
+<!--<script src="${ctxPath}/static/modular/system/pm/taskofuser/taskofuser_info.js"></script>-->
+@}

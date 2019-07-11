@@ -1,0 +1,284 @@
+@layout("/common/_container.html"){
+<link href="${ctxPath}/static/layui/css/layui.css" rel="stylesheet"/>
+<style>
+	 .time-content{
+    	-moz-box-shadow: 0px 0px 2px #e4e4e4; /* 老的 Firefox */
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.0470588235294118);
+    	width: 70%;
+    	padding:10px;
+    	border:1px solid rgba(235, 235, 235, 1);
+    	border-radius: 3px;
+    	text-align: left;
+    	background: #fff;
+    }
+    .back-blue{
+		background-color: #3399ff;
+	}
+	.layui-timeline-axis{
+    	color: #e4e4e4;
+    }
+    .layui-timeline-axi,.active{
+    	color: #3399ff;
+    }
+</style>
+<div id="customer-details">
+       <div class="details">
+            <div class="company-information information">
+                <h3>${item.khName}</h3>
+                <input id="id"  value="${item.id}" type="hidden"/>
+                <div class="content">
+                    <span class="content-title">客户状态：</span>
+                    <span class="content-text">${GJJL}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">重要程度：</span>
+                    <span class="content-text">${ZYCD}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">负责人：</span>
+                    <span class="content-text">${FzrNowId}</span>
+                </div>
+            </div>
+
+            <div class="detailed-information information">
+                <div class="content">
+                    <span class="content-title">客户名称：</span>
+                    <span class="content-text">${item.khName}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">客户简称：</span>
+                    <span class="content-text">${item.khSname}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">客户行业：</span>
+                    <span class="content-text">${KHHY}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">联系电话：</span>
+                    <span class="content-text">${item.khPhone}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">地区：</span>
+                    <span class="content-text">${item.khAddress}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">详细地址：</span>
+                    <span class="content-text">${item.khMoreaddress}</span>
+                </div>
+            </div>
+            <div class="source information">
+                <div class="content">
+                    <span class="content-title">客户来源：</span>
+                    <span class="content-text">${item.khLy}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">客户官网：</span>
+                    <span class="content-text">${item.khGw}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">客户简介：</span>
+                    <span class="content-text">${item.khJianj}</span>
+                </div>
+                <div class="content more">
+                    <span class="content-title">资料：</span>
+                    <p class="content-text more-text">xxxxxxxxxxxx.doc</p>
+                </div>
+            </div>
+            <div class="remarks information">
+                <div class="content">
+                    <span class="content-title">捞取时间：</span>
+                    <span class="content-text">${laoquTime}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">创建时间：</span>
+                    <span class="content-text">${creatTime}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">创建人：</span>
+                    <span class="content-text">${createPersion}</span>
+                </div>
+                <div class="content">
+                    <span class="content-title">备注：</span>
+                    <span class="content-text">${item.khBz}</span>
+                </div>
+            </div>
+        </div>
+       <div id="follow-up" class="ax-default">
+       		<div class="follow-up-title">
+                <div class="title-text hot">
+                    <span>跟进记录</span>
+                    <div class="underline"></div>
+                </div>
+                <!-- <div class="about-me">
+                    <input class="check" type="checkbox" value="checkbox">
+                    <span class="about-me-text">只看我的</span>
+                </div> -->
+            </div>
+       		 <!-- 更近机会 -->
+		    <div class="box margin-top-20" style="padding: 20px 30px 20px;">
+		    	<div class="box-content">
+		    		<ul class="layui-timeline">
+		    		@if(item.fzrNowId != null){
+		    		   <li class="layui-timeline-item">
+					    <i class="layui-icon layui-timeline-axis active">&#xe63f;</i>
+					    <div class="layui-timeline-content layui-text">
+					      <p class="time-content" style="text-align: center;">
+					      	<button style="color:white;height: 40px;padding: 10px 30px;" class="btn back-blue" onclick="Gjjl.openAddGjjl()">点击增加更近记录</button>
+					      </p>
+					    </div>
+					    
+					  </li>
+					  @}
+					  @for(item in gjjl){
+					  	 <li class="layui-timeline-item">
+						    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+						    <div class="layui-timeline-content layui-text">
+						      <div class="layui-timeline-title" style="text-align: left;">${item.jlTime!,dateFormat='yyyy-MM-dd HH:mm:ss'}
+						      	<span style="margin-left: 20px;fonr-size:12px !important;">${item.ryId!}</span>
+						      	<span style="margin-left: 20px;fonr-size:12px !important;">
+						      	${item.jlFs}
+						      	</span>
+						      </div>
+						      <p class="time-content">
+						        ${item.jlJlnr!}
+						      </p>
+						    </div>
+						  </li>
+					  @}
+					</ul>
+		    	</div>
+		   	</div>
+       </div>
+            <!--  <div class="follow-up-title">
+                <div class="title-text hot">
+                    <span>跟进记录</span>
+                    <div class="underline"></div>
+                </div>
+                <div class="about-me">
+                    <input class="check" type="checkbox" value="checkbox">
+                    <span class="about-me-text">只看我的</span>
+                </div>
+            </div>
+            <div class="follow-up-content">
+                <div class="content-main">
+                    竖线
+                    <div class="vertical-line ax-default"></div>
+                    每一条跟进记录
+                    <div class="add-follow-up first">
+                        <div class="circular"></div>
+                        <div class="add-one-box backlog">
+                            <div class="add-one">
+                            <button type="button" style="width: 188px;height: 38px;" class="btn btn-success"  onclick="Gjjl.openAddGjjl()" id="ensure">
+                                                                                  点击新增跟进记录
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="add-follow-up">
+                        <div class="circular"></div>
+                        <div class="backlog-content">
+                            <span class="data">${creatTime}</span>
+                            <span class="time">15:32</span>
+                            <span class="person">张三</span>
+                            <span class="mode">当面拜访</span>
+                        </div>
+                        <div class="backlog">
+                            <div class="backlog-text">
+                                <p>初步接触后，老宗对我们的系统非常感兴趣</p>
+                                <p>跟进机会：现金贷系统</p>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="add-follow-up">
+                        <div class="circular"></div>
+                        <div class="backlog-content">
+                            <span class="data">2018/04/09</span>
+                            <span class="time">15:32</span>
+                            <span class="person">张三</span>
+                            <span class="mode">当面拜访</span>
+                        </div>
+                        <div class="backlog">
+                            <div class="backlog-text">
+                                <p>初步接触后，老宗对我们的系统非常感兴趣</p>
+                                <p>跟进机会：现金贷系统</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-follow-up">
+                        <div class="circular"></div>
+                        <div class="backlog-content">
+                            <span class="data">2018/04/09</span>
+                            <span class="time">15:32</span>
+                            <span class="person">张三</span>
+                            <span class="mode">当面拜访</span>
+                        </div>
+                        <div class="backlog">
+                            <div class="backlog-text">
+                                <p>初步接触后，老宗对我们的系统非常感兴趣</p>
+                                <p>跟进机会：现金贷系统</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-follow-up">
+                        <div class="circular"></div>
+                        <div class="backlog-content">
+                            <span class="data">2018/04/09</span>
+                            <span class="time">15:32</span>
+                            <span class="person">张三</span>
+                            <span class="mode">当面拜访</span>
+                        </div>
+                        <div class="backlog">
+                            <div class="backlog-text">
+                                <p>初步接触后，老宗对我们的系统非常感兴趣</p>
+                                <p>跟进机会：现金贷系统</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+</div>
+<!-- <div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                             <input id="id"  value="${item.id}" type="hidden"/>
+                            <#input id="khName" name="客户名称" value="${item.khName}" underline="true" readonly="readonly"/>
+                            <#input id="khSname" name="客户简称" value="${item.khSname}" underline="true" readonly="readonly"/>
+                            <#input id="khZycd" name="重要程度" value="${ZYCD}" underline="true" readonly="readonly"/>
+                            <#input id="khHy" name="客户行业" value="${KHHY}" underline="true" readonly="readonly"/>
+                            <#input id="khGjjl" name="跟进记录" value="${GJJL}" underline="true" readonly="readonly"/>
+                            <#input id="khPhone" name="联系电话" value="${item.khPhone}" underline="true" readonly="readonly"/>
+                            <#input id="khLxr" name="联系人" value="${item.khLxr}" underline="true" readonly="readonly"/>
+                            <#input id="khAddress" name="地区" value="${item.khAddress}" underline="true" readonly="readonly"/>
+                            <#input id="khMoreaddress" name="详细地址ַ" value="${item.khMoreaddress}" readonly="readonly"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="khLy" name="客户来源" value="${item.khLy}" underline="true" readonly="readonly"/>
+                            <#input id="khGw" name="客户官网" value="${item.khGw}" underline="true" readonly="readonly"/>
+                            <#input id="khJianj" name="客户简介" value="${item.khJianj}" underline="true" readonly="readonly"/>
+                            <#input id="khBz" name="客户备注" value="${item.khBz}" underline="true" readonly="readonly"/>
+                            <#input id="creatTime" name="创建时间" value="${item.creatTime}" underline="true" readonly="readonly"/>
+                            <#input id="laoquTime" name="捞取时间" value="${item.laoquTime}" underline="true" readonly="readonly"/>
+                            <#input id="createPersion" name="创建人" value="${createPersion}" underline="true" readonly="readonly"/>
+                            <#input id="fzrNowId" name="现负责人" value="${FzrNowId}" underline="true" readonly="readonly"/>
+                            <#input id="fzrBeforId" name="前负责人" value="${FzrBeforId}" underline="true" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="新增跟近记录" id="ensure" icon="fa-check" clickFun="Gjjl.openAddGjjl()"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+    
+<script src="${ctxPath}/static/modular/crm/crmCustomer/crmCustomer_info.js"></script>
+
+<script src="${ctxPath}/static/modular/gjjl/gjjl/gjjl.js"></script>
+<link rel="stylesheet" href="${ctxPath}/static/css/follow-up.css?1">
+<link href="${ctxPath}/static/layui/layui.js" rel="stylesheet"/>
+@}

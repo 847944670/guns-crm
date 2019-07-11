@@ -1,0 +1,51 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="functionInfoForm">
+            <input id="moduleName" type="hidden" value="${item.moduleName}"/>
+            <input id="moduleId" type="hidden" value="${item.moduleId}"/>
+            <input type="hidden" id="id" value="${item.id}">
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="functionName" name="项目功能名称" value="${item.functionName}" underline="true"/>
+                            <#input id="functionDescription" name="项目功能描述" value="${item.functionDescription}" underline="true"/>
+                            <#select id="moduleid" name="所在模块" underline="true">
+                                <option value="">--模块名称--</option>
+                                @for(module in moduleList){
+                                <option value="${module.id}">${module.moduleName}</option>
+                                @}
+                            </#select>
+                </div>
+                <div class="col-sm-6 b-r">
+                            <#input id="startTime" name="开始时间" value="${item.startTime}" underline="true"/>
+                            <#input id="endTime" name="结束时间" value="${item.endTime}" underline="true"/>
+                </div>
+
+                <div class="col-sm-12">
+                    <script src="${ctxPath}/static/wangEditor/release/wangEditor.js"></script>
+                    <div id="marks1">
+                        <p>${item.marks}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="funOfModuleInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="funOfModuleInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/pm/function/function_info.js"></script>
+<script>
+    laydate.render({
+        elem: '#startTime'
+    });
+    laydate.render({
+        elem: '#endTime'
+    });
+</script>
+@}

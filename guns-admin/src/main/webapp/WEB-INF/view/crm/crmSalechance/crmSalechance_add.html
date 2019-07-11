@@ -1,0 +1,61 @@
+@layout("/common/_container.html"){
+<script src="${ctxPath}/static/js/vue/vue.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script> -->
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="saleChanceForm">
+			<input type="hidden" id="customerId" name="customerId"
+				value="${customId!}" />
+			<div class="row">
+				<div class="col-sm-12" id="app">
+					<#dictSelector id="changeType" name="changeType" code="saleChance"
+						label="机会类型" required="true"/>
+					<#input id="number" name="销售数量" type="number"
+						placeholder="请输入销售数量" model="number" required="true"/>
+					<#input id="unitPrice" name="销售单价" type="number"
+						placeholder="请输入销售单价" model="unitPrice" required="true"/>
+					<#input id="amount" name="销售金额" type="number"
+						placeholder="请输入销售金额" model="amount" disabled="disabled" required="true"/>
+					<!-- <#input id="finishDate" name="*结单日期" type="text" /> -->
+					<#dictSelector id="fstate" name="fstate" code="saleState"
+						label="销售阶段" required="true"/>
+				</div>
+			</div>
+
+			<div class="row btn-group-m-t">
+				<div class="col-sm-10">
+					<#button btnCss="info" name="提交" id="ensure" icon="fa-check"
+						clickFun="CrmSalechanceInfoDlg.addSubmit()" />
+					<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser"
+						clickFun="CrmSalechanceInfoDlg.close()" />
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script
+	src="${ctxPath}/static/modular/crm/crmSalechance/crmSalechance_info.js?4"></script>
+<script>
+	new Vue({
+		el : '#app',
+		data : {
+			number : '1',
+			unitPrice : '1',
+			amount : '1'
+		},
+	    watch : {
+	    	number : function (val) {
+	            this.amount = val * this.unitPrice;
+	        },
+	        unitPrice : function (val) {
+	        	this.amount = val * this.number;
+	        }
+	    }
+	})
+
+	/* laydate.render({
+		elem : '#finishDate'
+	}); */
+</script>
+@}

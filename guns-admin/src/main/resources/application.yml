@@ -1,0 +1,122 @@
+server:
+  port: 8989
+
+guns:
+  swagger-open: true              #是否开启swagger (true/false)
+  kaptcha-open: false             #是否开启登录时验证码 (true/false)
+  #  file-upload.js-path: d:/tmp       #文件上传目录(不配置的话为java.io.tmpdir目录)
+  spring-session-open: false      #是否开启spring session,如果是多机环境需要开启(true/false)
+  session-invalidate-time: 1800     #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
+  session-validation-interval: 900  #多久检测一次失效的session(只在单机环境下生效) 单位：秒
+
+oss:
+  endpoint: oss-cn-beijing.aliyuncs.com
+  accessId: LTAI7jG7NJLRyQ5a
+  accessKey: tmnwJPdfKYFrPUuD1St7iqBVOu6R6v
+  bucket: sxsdcrm
+  region: oss-cn-beijing
+  file-upload-path: D:/file/
+
+crm:
+  max-sales-chance: 5 #每个客户最多5条销售机会
+
+cusnum:
+  max-person: 50 #每个人最多添加50个客户
+
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 429088503@qq.com
+    password: ggvcbmwnvlgccabc
+    default-encoding: utf-8
+  profiles:
+    active: local
+  mvc:
+    static-path-pattern: /static/**
+    view:
+      prefix: /WEB-INF/view
+
+  devtools:
+    restart:
+      enabled: false
+      additional-paths: src/main/java
+      exclude: static/**,WEB-INF/view/**
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
+
+mybatis-plus:
+  typeAliasesPackage: com.stylefeng.guns.modular.system.model
+
+log:
+  path: guns-logs
+
+---
+
+#spring:
+#  profiles: local
+#  datasource:
+#    #url: jdbc:mysql://rm-bp14opizs59270391.mysql.rds.aliyuncs.com:3306/sdcrm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+#    url: jdbc:mysql://47.98.212.13:3306/sdcrm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+#    username: sd_crm
+#    password: sd_789_crm
+#    db-name: sdcrm #用来搜集数据库的所有表
+#    filters: wall,mergeStat
+
+##多数据源情况的配置
+#guns:
+#  muti-datasource:
+#    open: false
+#    url: jdbc:mysql://47.98.212.13:3306/sdcrm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+#    username: sd_crm
+#    password: sd_789_crm
+#    dataSourceNames:
+#      - dataSourceGuns
+#      - dataSourceBiz
+#
+#---
+#
+#spring:
+#  profiles: dev
+#  datasource:
+#    url: jdbc:mysql://47.98.212.13:3306/sdcrm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+#    username: sd_crm
+#    password: sd_789_crm
+#    db-name: guns #用来搜集数据库的所有表
+#    filters: wall,mergeStat
+#
+#---
+#
+#spring:
+#  profiles: test
+#  datasource:
+#    url: jdbc:mysql://47.98.212.13:3306/sdcrm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+#    username: sd_crm
+#    password: sd_789_crm
+#    db-name: sdcrm
+#    filters: wall,mergeStat
+#
+#---
+#
+#spring:
+#  profiles: produce
+#  datasource:
+#      url: jdbc:mysql://47.98.212.13:3306/sdcrm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+#      username: sd_crm
+#      password: sd_789_crm
+#      filters: wall,mergeStat
+
+
+---
+spring:
+  profiles: local
+  datasource:
+    #url: jdbc:mysql://rm-bp14opizs59270391.mysql.rds.aliyuncs.com:3306/sdcrm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.1.93:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+    db-name: guns #用来搜集数据库的所有表
+#    filters: wall,mergeStat
+
+

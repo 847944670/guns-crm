@@ -1,0 +1,46 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="客户UUID" value="${item.id}" underline="true"/>
+                            <#input id="customerName" name="客户名称" value="${item.customerName}" underline="true"/>
+                            <#input id="customerHy" name="客户行业" value="${item.customerHy}" underline="true"/>
+                            <#input id="customerStar" name="客户星级" value="${item.customerStar}" underline="true"/>
+                            <#input id="createTime" name="客户创建时间" value="${item.createTime}" underline="true"/>
+                            <#input id="cusPhoneNum" name="客户联系电话" value="${item.cusPhoneNum}" underline="true"/>
+                            <#input id="customerState" name="跟进状态" value="${item.customerState}" underline="true"/>
+                            <#input id="customerMess" name="客户简称" value="${item.customerMess}" underline="true"/>
+                            <#input id="customerRelation" name="联系人" value="${item.customerRelation}" underline="true"/>
+                            <#input id="area" name="地区" value="${item.area}" underline="true"/>
+                            <#input id="address" name="详细地址" value="${item.address}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="www" name="客户官网" value="${item.www}" underline="true"/>
+                            <#input id="customerRemark" name="备注" value="${item.customerRemark}" underline="true"/>
+                            <#input id="customerFrom" name="客户来源" value="${item.customerFrom}" underline="true"/>
+                            <#input id="salerName" name="销售人名称" value="${item.salerName}" underline="true"/>
+                            <#input id="salerCreateTime" name="销售时间" value="${item.salerCreateTime}" underline="true"/>
+                            <#input id="salerId" name="销售人ID" value="${item.salerId}" underline="true"/>
+                            <#input id="IsDelete" name="删除标识符" value="${item.IsDelete}" underline="true"/>
+                            <#input id="other1" name="其他1" value="${item.other1}" underline="true"/>
+                            <#input id="other2" name="其他2" value="${item.other2}" underline="true"/>
+                            <#input id="other3" name="其他3" value="${item.other3}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CrmCustomerInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CrmCustomerInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/crm/crmCustomer/crmCustomer_info.js"></script>
+@}

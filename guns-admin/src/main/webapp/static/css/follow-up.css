@@ -1,0 +1,248 @@
+
+.ax-default{
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #333333;
+    text-align: center;
+    line-height: normal;
+}
+
+#customer-details{
+    width: 100%;
+    height: 999px;
+    background: #f2f2f2;
+    position: relative;
+}
+
+#customer-details .details{
+    width: 40%;
+    height: 886px;
+    position: absolute;
+    left: 30px;
+    top: 20px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0980392156862745);
+}
+.details .information{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 15px 25px 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ededed;
+}
+.information h3{
+    font-family: 'Microsoft Tai Le Normal', 'Microsoft Tai Le';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: #666666;
+    line-height: 21px;
+}
+.information .content-title{
+    font-family: '微软雅黑';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: #999;
+    line-height: 18px;
+}
+.information .content-text{
+    font-family: '微软雅黑';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: #666;
+    line-height: 18px;
+}
+.information .content.more{
+    height: 130px;
+}
+.information .content.more .more-text{
+    line-height: 100px;
+    color: rgb(51,153,255);
+}
+.details .company-information{
+    height: 182px;
+}
+.details .detailed-information{
+    height: 239px;
+}
+.details .source{
+    height: 100px;
+}
+.details .remarks{
+    height: 120px;
+}
+
+
+
+
+#follow-up{
+    position: absolute;
+    left: 45%;
+    top: 20px;
+    width: 55%;
+    height: 886px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    border: 0px solid rgba(216,216,216,1);
+}
+/* 头部 */
+#follow-up .follow-up-title{
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 50px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(216,216,216,1);
+}
+/* 跟进记录 */
+#follow-up .title-text{
+    width: 85px;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    position: relative;
+}
+#follow-up .title-text.hot{
+    color: rgb(51,153,255);
+}
+#follow-up .underline{
+    display: none;
+}
+#follow-up .title-text.hot .underline{
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: rgb(51,153,255);
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+}
+
+/* 内容部分 */
+#follow-up .follow-up-content{
+    width: 100%;
+    height: 775px;
+}
+#follow-up .content-main{
+    width: 550px;
+    height: 100%;
+    position: relative;
+    left: 57px;
+    top: 0;
+    overflow: hidden;
+}
+/* 竖线 */
+#follow-up .content-main .vertical-line{
+    position: absolute;
+    top: 0;
+    left: 4px;
+    width: 2px;
+    height: 775px;
+    background: #ededed;
+}
+
+#follow-up .add-follow-up{
+    width: 100%;
+    height: 150px;
+    position: relative;
+}
+#follow-up .add-follow-up.first{
+    height: 102px;
+}
+/* 小圆 */
+#follow-up .circular{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #d9d9d9;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    background: #f9f9f9;
+}
+#follow-up .first .circular{
+    border: 2px solid rgb(51,153,255);
+}
+#follow-up .backlog{
+    position: absolute;
+    left: 20px;
+    top: 60px;
+    width: 480px;
+    height: 90px;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border: 1px solid rgba(235, 235, 235, 1);
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.0470588235294118);
+    font-family: 'Microsoft YaHei Regular', 'Microsoft YaHei';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color: #666;
+    line-height: 18px
+}
+
+#follow-up .backlog-text{
+    position: absolute;
+    left: 16px;
+    top: 17px;
+    width: 448px;
+    word-wrap: break-word;
+    text-align: left;
+    line-height: 28px;
+    font-size: 14px;
+    color: #333;
+}
+#follow-up .backlog-text p:last-child{
+    font-size: 12px;
+    color: #999;
+}
+
+ #follow-up .add-follow-up .add-one-box.backlog{
+     top: 30px;
+     width: 281px;
+     height: 73px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ #follow-up .add-one{
+     width: 188px;
+     height: 38px;
+     font-family: '微软雅黑';
+     font-weight: 400;
+     font-style: normal;
+     font-size: 14px;
+     color: #fff;
+     background: rgba(51,153,255,1);
+     text-align: center;
+     line-height: 38px;
+     border-radius: 3px;
+ }
+
+ /* 跟进记录*/
+#follow-up .backlog-content{
+    position: absolute;
+    left: 20px;
+    top: 35px;
+}
+#follow-up .backlog-content span{
+    font-size: 12px;
+    line-height: 20px;
+    color: #666;
+    margin-right: 20px;
+}
+
